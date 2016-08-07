@@ -1,0 +1,78 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1404\cocoasubrtf470
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red27\green29\blue31;\red198\green87\blue27;\red117\green117\blue117;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww19620\viewh9140\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 PREPARATIONS\
+\
+2. Install font Arcdopi04.ttf\
+3. This shouldn\'92t be necessary I think,  but In case of problems, make all the sh scripts executable.\
+4. Open \'84cachestoram.sh\'93 with an editor and adapt the path to your \'84Geektool\'93 folder. Read my comments in the sh file.\
+5. Open \'84Start.scpt\'93 with ScriptEditor and again, adapt the path to your \'84Geektool\'93 folder. IMPORTANT: Export this file as an app: \cf2 \expnd0\expndtw0\kerning0
+"Save As..." from the file menu in AppleScript Editor and set the "File Format" to application. Remember the path. This creates an app called \'84Start\'93.\
+6. Add \'84Start\'93 to your login items.  Instructions can be found here: {\field{\*\fldinst{HYPERLINK "http://www.howtogeek.com/206178/mac-os-x-change-which-apps-start-automatically-at-login/"}}{\fldrslt http://www.howtogeek.com/206178/mac-os-x-change-which-apps-start-automatically-at-login/}}\
+7. Logout or reboot to check that ramdisk gets created and populated with the files from your Geektools folder.\
+\
+SETTING UP GEEKTOOL\
+In your Geektool folder, open the folder \'84Glet\'93 and activate the ones you\'92re interested in. You may want to read the file \'84Posotionsarcs\'93 to install the geeklets in the correct order and place them where they need to be. This is also useful when things get messed up.\
+\
+ADDITIONAL STEPS / ADAPT GEEKLETS:\
+A) Openweather: This geeklet requires some additional work: \
+1. Install \'84homebrew\'93. Instructions can be found here: {\field{\*\fldinst{HYPERLINK "https://coolestguidesontheplanet.com/installing-homebrew-on-os-x-el-capitan-10-11-package-manager-for-unix-apps/"}}{\fldrslt https://coolestguidesontheplanet.com/installing-homebrew-on-os-x-el-capitan-10-11-package-manager-for-unix-apps/}}\
+2. Once this is done, open the terminal using  \'84brew install jq\'93\
+3. Downlod and extract / open  \'84city.list.json\'93 from {\field{\*\fldinst{HYPERLINK "http://bulk.openweathermap.org/sample/"}}{\fldrslt 
+\f1 \cf3 \ul \ulc3 http://bulk.openweathermap.org/sample/}} to find the code of your location. Copy that code. Open the folder \'84Weather\'93 in your Geektool folder and replace my city code (the number after APPID) with yours in the two sh scripts (weather.sh / weather2.sh). You may also want to change Celsius to Fahrenheit and of course replace the name of my location (AMEL) with yours.\
+4. IMPORTANT: Fetching your weather icon does not work from whithin geektool. I don\'92t know why. Everything works fine when running weather2.sh manually from a terminal before starting geektool. Here is a workaround:\
+Open a terminal and insert the following code:\
+nano .bash_profile\
+In that file we need:\
+alias weather=\'82sh /Volumes/ramdisk/Geektool/Weather/weather2.sh\'92\
+\
+B) Network traffic geeklets\
+To be honest, monitoring download / upload speeds with an arc doesn\'92t make much sense, because it\'92s hard to tell which data transfer rate represents 100% of your bandwidth but arcs look nice!!! That\'92s why you have to adapt a specific divider to your needs in Landownarc, Lanuparc, Wlandownarc Wlanuparc. Let me explain: The first few lines for Landownarc look like this: \
+LANDOWN=`tail -1 /Volumes/ramdisk/landown.txt | awk '\{print "X"int(($1)/25)"X"\}' | sed 's/\\%//'`\
+I know that my maximum bandwidth does rarely exceed a sluggish 1MB/s. So I need to divide this number by a number higher than 20. I used 25 to have some scope. Play with the dividers on the fly so that the arcs never hit 100% to avoid strange behaviour.\
+\
+ACKNOWLEDGMENTS / CREDITS\
+\
+1. Disk / Ram / Battery are based on d13t\'92s work.\cf4 \
+{\field{\*\fldinst{HYPERLINK "http://www.macosxtips.co.uk/geeklets/system/disk-capacity-meter/"}}{\fldrslt \cf0 \kerning1\expnd0\expndtw0 http://www.macosxtips.co.uk/geeklets/system/disk-capacity-meter/}}\cf0 \kerning1\expnd0\expndtw0 \
+2. For the other arcs credits go to JimmyBollox\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://www.macosxtips.co.uk/geeklets/system/system-info-circular-graphics/"}}{\fldrslt \cf0 http://www.macosxtips.co.uk/geeklets/system/system-info-circular-graphics/}}\
+3. OpenWeather: dr_selump and ejleon\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "http://www.macosxtips.co.uk/geeklets/weather/openweathermap-geeklet-inspired-by-ejleon/"}}{\fldrslt \cf0 http://www.macosxtips.co.uk/geeklets/weather/openweathermap-geeklet-inspired-by-ejleon/}}\
+4. Icons: JimmyBollox and {\field{\*\fldinst{HYPERLINK "http://www.gentleface.com/free_icon_set.html"}}{\fldrslt http://www.gentleface.com/free_icon_set.html}}\
+5. cachestoram.sh: nischu7\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://gist.github.com/nischu7/7194165"}}{\fldrslt \cf0 https://gist.github.com/nischu7/7194165}}\
+\
+NOTES / READ THIS IF YOUR INTERESTED\
+\
+1. I had to use a ramdisk to avoid problems with paths and to avoid constant reading and writing of .png files to and fro the ssd.\
+2. The arcs that need constant refreshing (CPU, the 4 nettraffic glets) don\'92t work with pngs. They use my own arc font instead and are more precise and not taxing on the system. The png method creates nicer looking arcs however. So I used it for Ram, Disk and Battery. These gets get refreshed every 60 seconds only, so no problem.\
+3. My code may seem weird at times. This is partly due to a lack of programming skills for sure.  However, I had to resort to sh scripts here and there mainly because shell commands don\'92t always work the way they work in a real shell within applescript or geektool. Also rounding numbers and getting rid of decimals to create arcs made me resort to writing temporary files to the ramdisk and feeding them back into applescript.\
+4. I\'92d be very happy for any suggestions that could clean my code.\
+\
+ENJOY!!!\
+\
+dopi04     \
+\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf2 \expnd0\expndtw0\kerning0
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\cf0 \kerning1\expnd0\expndtw0 \
+}
